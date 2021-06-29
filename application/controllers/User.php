@@ -36,7 +36,7 @@ class User extends CI_Controller
         } else {
             return $this->output
                 ->set_content_type('application/json')
-                ->set_status_header(404)
+                ->set_status_header(406)
                 ->set_output(
                     json_encode(['error' => array(
                         'code' => '404',
