@@ -125,8 +125,8 @@ class CI_Exceptions {
 		}
 		else
 		{
-			$heading = '404 Page Not Found';
-			$message = 'The page you requested was not found.';
+			$heading = '404 Not Found Exception';
+			$message = 'Unfortunately an exception appears on the API';
 		}
 
 		// By default we log this, but allow a dev to skip it
@@ -135,7 +135,17 @@ class CI_Exceptions {
 			log_message('error', $heading.': '.$page);
 		}
 
-		echo $this->show_error($heading, $message, 'error_404', 404);
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Content-type: application/json');
+		header("HTTP/1.1 500 Internal Server Error");
+	
+		echo json_encode(['error' => array(
+			'code' => '404',
+			'type' => 'EndPointExeption',
+			'user_message' => $heading,
+			'develoer_message' => $message
+		)]);
+
 		exit(4); // EXIT_UNKNOWN_FILE
 	}
 
@@ -161,7 +171,7 @@ class CI_Exceptions {
 		header("HTTP/1.1 500 Internal Server Error");
 	
 		echo json_encode(['error' => array(
-			'code' => '500',
+			'code' => $status_code ,
 			'type' => 'Error',
 			'user_message' => $heading,
 			'develoer_message' => $message
