@@ -54,6 +54,6 @@ $route['404_override'] = '_404';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['app']['POST'] = 'welcome/app';
-$route['user']['GET'] = 'welcome/user_all_get';
-$route['user/(:num)']['GET'] = 'welcome/user_get/$1';
-$route['user']['POST'] = 'welcome/user_post';
+$route['user']['GET'] = 'user/user_all_get';
+$route['user/(:num)']['GET'] = 'user/user_get/$1';
+$route['user']['POST'] = 'user/user_post';
